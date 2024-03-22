@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Random Dad Jokes</title>
+                <link rel="stylesheet" type="text/css" href="main.css">
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                <script>
+
+                        // AJAX METHOD:
+                        $(document).ready(function()
+                        {
+                                $("#get-joke").click(function()
+                                {
+                                        $.ajax
+                                        ({
+                                                type: "GET",
+                                                url: "https://icanhazdadjoke.com/",
+                                                dataType: "json",
+
+                                                success: function(response)
+                                                {
+                                                        $("#joke").text(response.joke);
+                                                },
+
+                                                headers:
+                                                {
+                                                        "Accept": "application/json"
+                                                }
+                                        });
+                                });
+                        });
+
+
+
+                        // FETCH METHOD:
+                        function getJoke()
+                        {
+                                fetch("https://icanhazdadjoke.com/",
+                                {
+                                        headers:
+                                        {
+                                        "Accept": "application/json"
+                                        }
+                                })
+                                .then(response => response.json())
+                                .then(data =>
+                                {
+                                        document.getElementById("joke-text").textContent = data.joke;
+                                });
+                        }
+
+                </script>
+        </head>
+
+
+        <body>
+                <h1>Random Dad Jokes</h1>
+
+                <div class="container">
+                        <!-- AJAX: -->
+                        <div class="ajax_container">
+                                <h2>AJAX Method</h2>
+                                <div id="joke"></div>
+                                <button id="get-joke">Get Joke</button>
+                        </div>
+
+
+                        <!-- Fetch: -->
+                        <div class="fetch_container">
+                                <h2>Fetch Method</h2>
+                                <div id="joke-text"></div>
+                                <button onclick="getJoke()">Get Joke</button>
+                        </div>
+
+
+                        <!-- Remaining Info: -->
+                        <div class="remaining_info">
+                                <h2>Details</h2>
+                                <p>
+                                        The <b>"icanhazdadjoke"</b> API is a free, open-source API that
+                                        provides users with a random dad joke every time it's called.
+                                        The API has over 300,000 jokes in its database and has become
+                                        a popular source for developers to include in their projects
+                                        for entertainment purposes.
+                                </p>
+
+
+                                <h2>Citation</h2>
+                                <p>
+                                        Website where I found it:<br>
+                                        <a href="https://icanhazdadjoke.com/api">https://icanhazdadjoke.com/api</a>
+                                </p>
+
+
+                                <h2>API Request Options</h2>
+                                <p>
+                                        <b>AJAX:</b><br>
+                                        None<br>
+                                        <br>
+                                        
+                                        
+                                        <b>FETCH:</b><br>
+                                        None<br>
+                                </p>
+
+
+                                <h2>Applications</h2>
+                                <p>
+                                        
+                                        <b>1. Slack integrations:</b><br>
+                                        Companies using Slack as their communication tool could use the API
+                                        to send jokes to their team members as a way to keep the mood light
+                                        and promote team bonding.<br><br>
+
+                                        <b>2. Creating chatbots:</b><br>
+                                        Chatbots can use this API to inject humor into their conversations,
+                                        making them more engaging and enjoyable for users.
+                                </p>
+                        </div>
+                </div>
+
+        </body>
+
+
+</html>
